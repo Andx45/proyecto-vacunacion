@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 3/09/2021, 09:17:53 PM
+    Author     : IXCAMEY
+*/
+
+/* Hoja de estilos css para index*/
+
+body{
+    font-family: sans-serif;
+    display: block;
+}
+
+header{
+    width: 100%;
+    background: #135cbe;
+    color: white;
+    font-size: 12px;
+    padding: 8px;
+}
+
+h1, h2{
+    font-weight: lighter;
+}
+
+#nota{
+    color: red;
+}
+
+input, select{
+    border-style: solid;
+    border-color: #E0DCF4;
+    height: 22px;
+}
+
+#btn{
+    width: 100%;
+    background: #135cbe;
+    text-align: center;
+    color: white;
+    padding-left: 50%;
+    padding-right: 50%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    height: 30px;
+    border-color: lightblue;
+}
+
+.sel{
+    width: 95%;
+}
+
+.sel2{
+    width: 90%;
+}
+
+/* Líneas guía */
+/*table, td{
+    border: 1px solid black;
+}*/ 
