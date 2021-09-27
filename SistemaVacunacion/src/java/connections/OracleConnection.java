@@ -5,15 +5,13 @@
  */
 package connections;
 
-import java.sql.Connection;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author User
- */
 public class OracleConnection {
     private Connection conexion;
-
+ 
     public Connection getConexion() {
         return conexion;
     }
@@ -22,11 +20,46 @@ public class OracleConnection {
         this.conexion = conexion;
     }
 
-    public void conectar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public OracleConnection conectar() {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:umg";            
+            conexion = DriverManager.getConnection(BaseDeDatos, "system","Umg$19");
+
+            if (conexion != null) {
+                System.out.println("Conexion exitosa!");
+            } else {
+                System.out.println("Conexion fallida!");
+            }
+        }
+        catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return this;
     }
 
-    public void cerrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+
+    public ResultSet consultar(String sql) {
+        ResultSet resultado = null;
+        try {
+            Statement sentencia;
+            sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            resultado = sentencia.executeQuery(sql);
+            getConexion().commit();            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return resultado;
+    }
+   
+    
+    public void cerrar(){
+        try {
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(OracleConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
