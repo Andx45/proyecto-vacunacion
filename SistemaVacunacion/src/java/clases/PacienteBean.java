@@ -5,17 +5,31 @@
  */
 package clases;
 
-import java.sql.Date;
-
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author CONSUTELCO
  */
 public class PacienteBean {
-    String nombre1,nombre2,nombre3,apellido1,apellido2,direccion;
-    int  celular,comunidad,pueblo,escolaridad,sexo,zona,discapacidad,enfermedad,telefono,departamento,municipio,vacunacion;
-    boolean iggs;
-    Date nacimiento;
+    String nombre1,nombre2,nombre3,apellido1,apellido2,direccion, igss, nacimiento;
+    int celular,comunidad,pueblo,escolaridad,sexo,zona,discapacidad,enfermedad,telefono,departamento,municipio,vacunacion;
+    //Date nacimiento; 
+    long dpi;
+
+    public PacienteBean() {
+    }
+
+    public long getDpi() {
+        return dpi;
+    }
+
+    public void setDpi(String dpi) {
+        this.dpi = Long.parseLong(dpi);
+    }
     
     public String getNombre1() {
         return nombre1;
@@ -69,88 +83,88 @@ public class PacienteBean {
         return celular;
     }
 
-    public void setCelular(int celular) {
-        this.celular = celular;
+    public void setCelular(String celular) {
+        this.celular = Integer.parseInt(celular);
     }
 
     public int getComunidad() {
         return comunidad;
     }
 
-    public void setComunidad(int comunidad) {
-        this.comunidad = comunidad;
+    public void setComunidad(String comunidad) {
+        this.comunidad = Integer.parseInt(comunidad);
     }
 
     public int getPueblo() {
         return pueblo;
     }
 
-    public void setPueblo(int pueblo) {
-        this.pueblo = pueblo;
+    public void setPueblo(String pueblo) {
+        this.pueblo = Integer.parseInt(pueblo);
     }
 
     public int getEscolaridad() {
         return escolaridad;
     }
 
-    public void setEscolaridad(int escolaridad) {
-        this.escolaridad = escolaridad;
+    public void setEscolaridad(String escolaridad) {
+        this.escolaridad = Integer.parseInt(escolaridad);
     }
 
     public int getSexo() {
         return sexo;
     }
 
-    public void setSexo(int sexo) {
-        this.sexo = sexo;
+    public void setSexo(String sexo) {
+        this.sexo = Integer.parseInt(sexo);
     }
 
     public int getZona() {
         return zona;
     }
 
-    public void setZona(int zona) {
-        this.zona = zona;
+    public void setZona(String zona) {
+        this.zona = Integer.parseInt(zona);
     }
 
     public int getDiscapacidad() {
         return discapacidad;
     }
 
-    public void setDiscapacidad(int discapacidad) {
-        this.discapacidad = discapacidad;
+    public void setDiscapacidad(String discapacidad) {
+        this.discapacidad = Integer.parseInt(discapacidad);
     }
 
     public int getEnfermedad() {
         return enfermedad;
     }
 
-    public void setEnfermedad(int enfermedad) {
-        this.enfermedad = enfermedad;
+    public void setEnfermedad(String enfermedad) {
+        this.enfermedad = Integer.parseInt(enfermedad);
     }
 
     public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setTelefono(String telefono) {
+        this.telefono = Integer.parseInt(telefono);
     }
 
     public int getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(int departamento) {
-        this.departamento = departamento;
+    public void setDepartamento(String departamento) {
+        this.departamento = Integer.parseInt(departamento);
     }
 
     public int getMunicipio() {
         return municipio;
     }
 
-    public void setMunicipio(int municipio) {
-        this.municipio = municipio;
+    public void setMunicipio(String municipio) {
+        this.municipio = Integer.parseInt(municipio);
     }
 
     public int getVacunacion() {
@@ -161,44 +175,19 @@ public class PacienteBean {
         this.vacunacion = vacunacion;
     }
 
-    public boolean isIggs() {
-        return iggs;
+    public String getIgss() {
+        return igss;
     }
 
-    public void setIggs(boolean iggs) {
-        this.iggs = iggs;
+    public void setIgss(String igss) {
+        this.igss = igss;
     }
-
-    public Date getNacimiento() {
+    
+    public String getNacimiento() {
         return nacimiento;
     }
 
-    public void setNacimiento(Date nacimiento) {
+    public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
-    
-    
-
-    public PacienteBean(String nombre1, String nombre2, String nombre3, String apellido1, String apellido2, String direccion, int celular, int comunidad, int pueblo, int escolaridad, int sexo, int zona, int discapacidad, int enfermedad, int telefono, int departamento, int municipio, int vacunacion, boolean iggs, Date nacimiento) {
-        this.nombre1 = nombre1;
-        this.nombre2 = nombre2;
-        this.nombre3 = nombre3;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.direccion = direccion;
-        this.celular = celular;
-        this.comunidad = comunidad;
-        this.pueblo = pueblo;
-        this.escolaridad = escolaridad;
-        this.sexo = sexo;
-        this.zona = zona;
-        this.discapacidad = discapacidad;
-        this.enfermedad = enfermedad;
-        this.telefono = telefono;
-        this.departamento = departamento;
-        this.municipio = municipio;
-        this.vacunacion = vacunacion;
-        this.iggs = iggs;
-        this.nacimiento = nacimiento;
-    }    
 }

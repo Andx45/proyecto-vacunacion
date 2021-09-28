@@ -15,18 +15,24 @@ import java.sql.Statement;
  *
  * @author User
  */
-public class PacienteBD implements InterfazPaciente{
+public class PacienteBD {
     private OracleConnection con;
     private Connection cn;
     private ResultSet rs;
     private String sql;
     
     
-    @Override
      public boolean insertar(PacienteBean Paciente){
         
         try {
-            sql= "INSERT INTO TBL_PACIENTE (nombre1,nombre2,nombre3,apellido1,apellido2,direccion,celular,comunidad,pueblo,escolaridad,sexo,zona,discapacidad,enfermedad,telefono,departamento,municipio,vacunacion)VALUES(Paciente.getDpi(), '"+Paciente.getNombre1()+"', '"+Paciente.getNombre2()+"','"+Paciente.getNombre3()+"','"+Paciente.getApellido1()+"', '"+Paciente.getApellido2()+"', '"+Paciente.getDireccion()+"','"+Paciente.getCelular()+"', '"+Paciente.getComunidad()+"', '"+Paciente.getPueblo()+"', '"+Paciente.getEscolaridad()+"', '"+Paciente.getSexo()+"', '"+Paciente.getZona()+"', '"+Paciente.getDiscapacidad()+"', '"+Paciente.getEnfermedad()+"', '"+Paciente.getTelefono()+"', '"+Paciente.getDepartamento()+"', '"+Paciente.getMunicipio()+"', '"+Paciente.getVacunacion()+"')";
+            sql= "INSERT INTO TBL_PACIENTE (CUI,NOMBRE1,NOMBRE2,NOMBRE3,APELLIDO1,APELLIDO2,FECHA_NACIMIENTO,DIRECCION,CELULAR,"
+                    + "IGSS,ID_COMUNIDAD_LINGUISTICA,ID_PUEBLO,ID_ESCOLARIDAD,ID_SEXO,ID_ZONA,ID_DISCAPACIDAD,ID_ENFERMEDAD,ID_TELEFONIA,ID_DEPARTAMENTO,"
+                    + "ID_MUNICIPIO) VALUES(" + Paciente.getDpi() +", '"+Paciente.getNombre1()+"', '"+Paciente.getNombre2()+
+                    "','"+Paciente.getNombre3()+"','"+Paciente.getApellido1()+"', '"+Paciente.getApellido2()+"', "
+                    +"TO_DATE('"+Paciente.getNacimiento()+"', 'yyyy-mm-dd'),'"+Paciente.getDireccion()+"','"+Paciente.getCelular()+"', '"+Paciente.getIgss()+"', '"+Paciente.getComunidad()+"', '"
+                    +Paciente.getPueblo()+"', '"+Paciente.getEscolaridad()+"', '"+Paciente.getSexo()+"', '"
+                    +Paciente.getZona()+"', '"+Paciente.getDiscapacidad()+"', '"+Paciente.getEnfermedad()+"', '"
+                    +Paciente.getTelefono()+"', '"+Paciente.getDepartamento()+"', '"+Paciente.getMunicipio()+"')";
             con = new OracleConnection();    
             con.conectar();
             cn = con.getConexion();
@@ -39,7 +45,7 @@ public class PacienteBD implements InterfazPaciente{
             sentencia.close();
         }
         catch (SQLException e) {
-            System.out.print("ERROR SQL");
+            System.out.print("ERROR SQL" + e.getMessage() + sql);
             return false;
         }finally{
             con.cerrar();
