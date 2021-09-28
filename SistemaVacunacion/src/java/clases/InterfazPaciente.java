@@ -12,6 +12,5 @@ import java.util.List;
  */
 public interface InterfazPaciente {
     public boolean insertar(PacienteBean Paciente);
-    public List<PacienteBean> buscar ();
     
 }

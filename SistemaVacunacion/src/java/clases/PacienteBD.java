@@ -15,13 +15,14 @@ import java.sql.Statement;
  *
  * @author User
  */
-public class PacienteBD {
+public class PacienteBD implements InterfazPaciente{
     private OracleConnection con;
     private Connection cn;
     private ResultSet rs;
     private String sql;
     
     
+    @Override
      public boolean insertar(PacienteBean Paciente){
         
         try {
