@@ -127,7 +127,6 @@
                                 }
                             %>
                             console.log("<%=i%>");
-                            console.log(document.querySelector('input[name="radioSi-No"]:checked').value);
                         }
                         x++;
                 <%
