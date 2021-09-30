@@ -36,10 +36,6 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
             
-            function verdadero(){
-                swal('verdadero', 'Prueba', 'success');
-            }
-            
             //Agrega los datos a la base de datos
              function inserPaciente(){
                  document.frmRegistro.action = "index.jsp?accion=insertar";
@@ -72,16 +68,8 @@
                          String cuiPa = String.valueOf(nuevoPaciente.getDpi());
                          PacienteBD nuevoPaBD = new PacienteBD();
                          flgOperation = nuevoPaBD.insertar(nuevoPaciente);
-                         String valorEstado = String.valueOf(flgOperation);
-                         System.out.print(valorEstado);
-                         if(valorEstado == "true"){
-                 %>
-                            verdadero();
-                 <%
+                         if(flgOperation == true){
                          }else{
-                 %>
-                             swal('Falso', 'Funciona', 'success');
-                 <%
                          }
                      }
                  %>
