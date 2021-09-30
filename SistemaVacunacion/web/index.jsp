@@ -32,11 +32,13 @@
                 return lstPuesto;
             }
 
-            public boolean flgTraerPuestos = false;
-            public boolean flgTraerMuni = false;
         %>
-        
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
+            
+            function verdadero(){
+                swal('verdadero', 'Prueba', 'success');
+            }
             
             //Agrega los datos a la base de datos
              function inserPaciente(){
@@ -67,8 +69,20 @@
                          nuevoPaciente.setTelefono(request.getParameter("txtTelefonia"));
                          nuevoPaciente.setDepartamento(request.getParameter("txtDepartamento"));
                          nuevoPaciente.setMunicipio(request.getParameter("txtMunicipio"));
+                         String cuiPa = String.valueOf(nuevoPaciente.getDpi());
                          PacienteBD nuevoPaBD = new PacienteBD();
                          flgOperation = nuevoPaBD.insertar(nuevoPaciente);
+                         String valorEstado = String.valueOf(flgOperation);
+                         System.out.print(valorEstado);
+                         if(valorEstado == "true"){
+                 %>
+                            verdadero();
+                 <%
+                         }else{
+                 %>
+                             swal('Falso', 'Funciona', 'success');
+                 <%
+                         }
                      }
                  %>
              }
@@ -109,7 +123,6 @@
              function cambioDeOpcion(valor, id){
                  var x = 1;
                 <%
-                    //if(flgTraerMuni ==  true){
                     int i = 1;
                     do{
                 %>
@@ -132,7 +145,6 @@
                 <%
                         i++;
                     }while(i < 23);
-                    //}
                 %>
              }
              
@@ -140,7 +152,6 @@
              function cambioPuesto(puesto){
                  var p = 1;
                  <%
-                    //if (flgTraerPuestos == true){
                     int c = 1;
                     do{
                  %>
@@ -163,7 +174,6 @@
                  <%
                         c++;
                      }while(c < 341);
-                    //}
                  %>
              }
              
@@ -178,20 +188,43 @@
                  }
              }
              
+             // Realiza todas las validaciones necesarias antes de enviar la información al servidor
              function validarSubmit(){
                  if(document.getElementById("Cui").value.length == 0 || document.getElementById("Nombre1").value.length == 0 ||
                          document.getElementById("Ape1").value.length == 0 || document.getElementById("Ape2").value.length == 0 ||
                          document.getElementById("residencia").value.length == 0 || document.getElementById("feNac").value.length == 0 ||
                          document.getElementById("celular1").value.length == 0 || document.getElementById("celular2").value.length == 0){
-                     alert("Hay campos vacíos");
+                     swal('No se puede realizar el registro', 'Hay campos obligatorios vacíos', "error");
                 }else{
                     if(document.getElementById("celular1").value !== document.getElementById("celular2").value){
-                        alert("Los números de celular no coinciden");
+                        swal('No se puede realizar el registro', 'Los números de celular ingresados no coinciden', "error");
                     }else{
-                        inserPaciente();
+                        if(document.getElementById('radioSi').checked == false && document.getElementById('radioNo').checked == false){
+                            swal('No se puede realizar el registro', 'No ha seleccioado su estado de afiliación al IGSS', "error");
+                        }else{
+                            swal({
+                                title: "Atención",
+                                text: "Estás a punto de guardar tu información. \n\
+                                        Una vez la información sea ingresada al sistema los datos no podrán ser actualizados.\n\
+                                        ¿Deseas continuar?",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then((willDelete) =>{
+                                if(willDelete){
+                                    swal({
+                                       title: "Información Guardada con éxito",
+                                       text: "El CUI " + document.getElementById("Cui").value + " se ha registrado exitosamente.\n\
+                                                El Centro de Salud más cercano se estará comunicando con usted para indicar el día, lugar y hora en que será vacunado.",
+                                       icon: "success"
+                                    });
+                                    inserPaciente();
+                                }
+                            });
+                        }
+                        }
                     }
                 }
-             }
              
         </script>
         
@@ -203,7 +236,7 @@
         <h1>Datos Generales</h1>
         <table>
             <tr>
-                <td colspan="2"><h5>Nacionalidad*</h5></td>
+                <td colspan="2"><h5>Nacionalidad* </h5></td>
                 <td colspan="2"><input type="text" name="nacionalidad" size="40" value="guatemalteco" disabled></td>
                 <td colspan="2" align="center"><h5>CUI* </h5></td>
                 <td colspan="2"><input type="text" name="txtCui" size="40" value="" placeholder="CUI" maxlength="13" onkeypress="return validarTecla(event);" id="Cui"></td>
@@ -334,7 +367,9 @@
                 </td>
             </tr>
         </table>
+        <h5 id="nota">*Después de guardar la información no se podrán actualizar los datos</h5>
         <input  id="btn" type="button" name="btnIngresar" value="Ingresar Datos" onclick="validarSubmit()">
         </form>
+        
     </body>
 </html>
